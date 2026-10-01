@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Журнал аудита{% endblock %}
+
+{% block content %}
+<h2>Журнал аудита безопасности</h2>
+<table class="table table-striped table-bordered mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Время</th>
+            <th>Пользователь</th>
+            <th>Событие</th>
+            <th>Детали</th>
+            <th>IP-адрес</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.id }}</td>
+            <td>{{ log.timestamp }}</td>
+            <td>{{ log.username }} (ID: {{ log.user_id or '-' }})</td>
+            <td><span class="badge bg-secondary">{{ log.event_type }}</span></td>
+            <td>{{ log.description }}</td>
+            <td>{{ log.ip_address }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
